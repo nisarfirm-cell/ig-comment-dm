@@ -1,0 +1,14 @@
+# Copy this file to `.dev.vars` for local `npm run dev`. Never commit `.dev.vars`.
+# For a deployed Worker use the Deploy to Cloudflare form or `npx wrangler secret put <NAME>`.
+
+# "Instagram app secret" from Meta App Dashboard > Instagram > API setup with Instagram login
+META_APP_SECRET=replace-me
+
+# Long-lived Instagram User access token from the same page ("Generate token"). Auto-refreshed daily.
+IG_ACCESS_TOKEN=replace-me
+
+# Any random string you invent; type the same value in Meta's "Verify token" box
+WEBHOOK_VERIFY_TOKEN=replace-me
+
+# Password for the dashboard. Use a long one; anyone with it can change your automations.
+ADMIN_PASSWORD=replace-me

@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ig-comment-dm",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "observability": { "enabled": true },
+
+  // The dashboard (./public). Only /api/* and /webhook run the Worker code.
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*", "/webhook", "/privacy"]
+  },
+
+  // Database for automations, activity and de-duplication.
+  // No id on purpose: `wrangler deploy` and the Deploy to Cloudflare button create it for you.
+  // Tables are created automatically on first request.
+  "d1_databases": [{ "binding": "DB", "database_name": "ig-comment-dm","database_id": "0a9f3536-95dc-4056-b341-e175b72ae2e2" }],
+
+  // Daily housekeeping + automatic access-token refresh (03:17 UTC).
+  "triggers": { "crons": ["17 3 * * *"] },
+
+  // Not secret. Change only if Meta retires this Graph API version.
+  "vars": { "GRAPH_API_VERSION": "v27.0" }
+
+  // Secrets are NOT in this file. See .dev.vars.example:
+  //   META_APP_SECRET, IG_ACCESS_TOKEN, WEBHOOK_VERIFY_TOKEN, ADMIN_PASSWORD
+}

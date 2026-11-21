@@ -1,0 +1,40 @@
+{
+  "name": "ig-comment-dm",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "AutoDM: free, self-hosted Instagram comment-to-DM automation on Cloudflare Workers, using only Meta's official Instagram API.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261113.1",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0",
+    "wrangler": "^4.0.0"
+  },
+  "cloudflare": {
+    "bindings": {
+      "META_APP_SECRET": {
+        "description": "Meta **App secret** (App settings → Basic). Put `temp` first if you don't have it yet."
+      },
+      "IG_ACCESS_TOKEN": {
+        "description": "Token from Meta → Instagram → API setup → **Generate token**. Put `temp` first if you don't have it yet."
+      },
+      "WEBHOOK_VERIFY_TOKEN": {
+        "description": "Any random text. Paste the same value into Meta's **Verify token** box. Generate one with `openssl rand -hex 16`."
+      },
+      "ADMIN_PASSWORD": {
+        "description": "Password for your AutoDM dashboard. Use a long one."
+      },
+      "DB": {
+        "description": "Stores your automations and activity. Created automatically."
+      }
+    }
+  }
+}
